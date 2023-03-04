@@ -17,20 +17,19 @@ class HomeController extends GetxController with HandleErrorLoading {
   HomeController({
     required this.getAllSurahUsecase,
     required this.getDetailSurahUsecase,
-    required this.allSurah,
-    required this.detailSurah,
   });
 
-  List<Surah> allSurah = [];
-  FutureOr<void> getAllSurah() async {
-    showLoading();
+  
+  Future<List<Surah>> getAllSurah() async {
     final result = await getAllSurahUsecase();
+    List<Surah> allSurah = [];
     result.fold(
       (l) => AppComponent.showCustomSnackBar(l.message),
       (r) => allSurah = r,
     );
-    hideLoading();
     update();
+    return allSurah;
+    
   }
 
   late DetailSurah detailSurah;

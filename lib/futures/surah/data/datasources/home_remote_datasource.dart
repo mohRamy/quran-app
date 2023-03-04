@@ -24,18 +24,18 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<List<Surah>> getAllSurah() async {
     http.Response res = await apiClient.getData(
-      ApiConstance.getPost,
+      ApiConstance.allSurah,
     );
     List<Surah> allsurah = [];
     stateErrorHandle(
       res: res,
       onSuccess: () {
-        for (var i = 0; i < jsonDecode(res.body).length; i++) {
+        for (var i = 0; i < jsonDecode(res.body)["data"].length; i++) {
           allsurah.add(
             SurahModel.fromJson(
                 jsonDecode(
                   res.body,
-                )[i],
+                )["data"][i],
               ),
           );
         }
@@ -47,7 +47,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<DetailSurah> getDetailSurah(String surahId) async {
     http.Response res = await apiClient.getData(
-      ApiConstance.getPost,
+      "${ApiConstance.detailSurah}$surahId",
     );
     late DetailSurah detailSurah;
     stateErrorHandle(
@@ -57,7 +57,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
             DetailSurahModel.fromJson(
                 jsonDecode(
                   res.body,
-                ),
+                )["data"],
           );
         }
     );

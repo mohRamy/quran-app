@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dartz/dartz.dart';
 import 'package:quran_app/futures/surah/domian/entities/details_surah.dart';
 
