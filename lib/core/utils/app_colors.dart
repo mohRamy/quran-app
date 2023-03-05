@@ -10,7 +10,6 @@ class AppColors {
   static Color backgroundDark = HexColor("FF1E0771");
   static Color subBackgroundDark = HexColor("FF2B0C8B");
   static Color button = HexColor("FFE6704A");
-  static Color subString = HexColor("FFB9A2D8");
 }
 
 class Themes {

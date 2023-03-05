@@ -7,10 +7,9 @@ import 'package:quran_app/futures/surah/domian/entities/surah.dart';
 import 'package:quran_app/futures/surah/domian/usecases/get_all_surah.dart';
 import 'package:quran_app/futures/surah/domian/usecases/get_detail_surah.dart';
 
-import '../../../../core/error/handle_error_loading.dart';
 import '../../../../core/utils/app_component.dart';
 
-class HomeController extends GetxController with HandleErrorLoading {
+class HomeController extends GetxController {
   final GetAllSurahUsecase getAllSurahUsecase;
   final GetDetailSurahUsecase getDetailSurahUsecase;
 

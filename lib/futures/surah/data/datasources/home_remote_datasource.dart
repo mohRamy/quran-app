@@ -47,7 +47,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<DetailSurah> getDetailSurah(String surahId) async {
     http.Response res = await apiClient.getData(
-      "${ApiConstance.detailSurah}$surahId",
+      "${ApiConstance.detailsSurah}$surahId",
     );
     late DetailSurah detailSurah;
     stateErrorHandle(

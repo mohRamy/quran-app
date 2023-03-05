@@ -18,7 +18,7 @@ Future<void> init() async {
 
   // api client
   Get.lazyPut(
-      () => ApiClient(box: Get.find(), appBaseUrl: ApiConstance.baseUrl));
+      () => ApiClient(box: Get.find()));
 
   // netInfo
   Get.lazyPut<NetworkInfo>(() => NetworkInfoImpl(Get.find()));
