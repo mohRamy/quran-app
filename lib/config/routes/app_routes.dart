@@ -5,9 +5,11 @@ abstract class Routes {
   Routes._();
   static const introduction = _Paths.introduction;
   static const home = _Paths.home;
+  static const detailSurah = _Paths.detailSurah;
 }
 
 abstract class _Paths {
   static const introduction = '/introduction';
   static const home = '/home';
+  static const detailSurah = '/detail-surah';
 }

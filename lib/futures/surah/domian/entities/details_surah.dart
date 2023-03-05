@@ -8,7 +8,7 @@ class DetailSurah extends Equatable {
   final NameDetail name;
   final RevelationDetail revelation;
   final DataTafsir tafsir;
-  final PreBismillah preBismillah;
+  final PreBismillah? preBismillah;
   final List<Verse> verses;
 
   const DetailSurah({
@@ -74,7 +74,7 @@ class TranslationDetail extends Equatable {
 }
 
 class PreBismillah extends Equatable {
-  final Text text;
+  final TextDetail text;
   final TranslationDetail translation;
   final Audio audio;
 
@@ -108,11 +108,11 @@ class Audio extends Equatable {
       ];
 }
 
-class Text extends Equatable {
+class TextDetail extends Equatable {
   final String arab;
   final Transliteration transliteration;
 
-  const Text({
+  const TextDetail({
     required this.arab,
     required this.transliteration,
   });
@@ -169,7 +169,7 @@ class DataTafsir extends Equatable {
 class Verse extends Equatable {
   final Number number;
   final Meta meta;
-  final Text text;
+  final TextDetail text;
   final TranslationDetail translation;
   final Audio audio;
   final VerseTafsir tafsir;

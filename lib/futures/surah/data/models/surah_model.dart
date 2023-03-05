@@ -1,5 +1,4 @@
 // https://api.quran.gading.dev/surah
-
 import 'dart:convert';
 
 import 'package:quran_app/futures/surah/domian/entities/surah.dart';

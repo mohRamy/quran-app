@@ -1,96 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'hex_color.dart';
 
 class AppColors {
-  
-
-  static Color primary = HexColor("FF0088CC");
-  static Color canvas = HexColor("FF34495E");
-  static Color bgLightColor = HexColor("FFECF9FF");
-  static Color bgDarkColor = Colors.black;
-  static Color blackColor = HexColor("FF34495E");
-  static Color white = HexColor("FFFFFFFF");
-  static Color textfieldColor = HexColor("FF1c1d1f");
-  static Color greyColor = HexColor("FF161616");
-  static Color chatBoxOther = HexColor("FF3d3d3f");
-  static Color chatBoxMe = HexColor("FF066162");
-
-  static Gradient gradient = LinearGradient(
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
-    colors: [
-      // Color(0xFF0088CC),
-      // Color(0xFF34495E),
-      primary,
-      canvas,
-    ],
-  );
+  static Color origin = HexColor("FF943DF4");
+  static Color branch = HexColor("FFD2BEE8");
+  static Color backgroundLight = HexColor("FFFAF8FC");
+  static Color subBackgroundLight = HexColor("FFF8F5FC");
+  static Color backgroundDark = HexColor("FF1E0771");
+  static Color subBackgroundDark = HexColor("FF2B0C8B");
+  static Color button = HexColor("FFE6704A");
+  static Color subString = HexColor("FFB9A2D8");
 }
 
 class Themes {
   static final light = ThemeData(
-      scaffoldBackgroundColor: AppColors.bgLightColor,
-      dividerColor: AppColors.bgDarkColor,
-      brightness: Brightness.light,
-      primaryColor: AppColors.primary,
-      canvasColor: AppColors.canvas,
-      appBarTheme: AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: AppColors.bgLightColor,
-          statusBarIconBrightness: Brightness.dark,
-        ),
+    colorScheme: ColorScheme.fromSeed(seedColor: AppColors.origin),
+    scaffoldBackgroundColor: AppColors.backgroundLight,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.backgroundLight,
+      elevation: 0.0,
+    ),
+    cardTheme: CardTheme(
+      color: AppColors.subBackgroundLight,
+    ),
+    textTheme: TextTheme(
+      titleLarge: TextStyle(
+        color: AppColors.origin,
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: AppColors.bgLightColor,
+      titleMedium: TextStyle(
+        color: AppColors.branch,
+        fontSize: 20,
       ),
-      textTheme: const TextTheme(
-        bodyText1: TextStyle(
-          color: Colors.black,
-        ),
-        bodyText2: TextStyle(
-          color: Colors.white,
-        ),
-      
+      titleSmall: const TextStyle(
+        color: Colors.black,
       ),
-      iconTheme: IconThemeData(
-        color: AppColors.bgDarkColor,
-      ),
-      bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: AppColors.bgLightColor,
-      )
-      );
+    ),
+    useMaterial3: true,
+  );
 
   static final dark = ThemeData(
-      scaffoldBackgroundColor: AppColors.bgDarkColor,
-      dividerColor: Colors.white,
-      brightness: Brightness.dark,
-      primaryColor: AppColors.blackColor,
-      canvasColor: AppColors.canvas,
-      backgroundColor: AppColors.greyColor,
-      appBarTheme: AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: AppColors.bgDarkColor,
-          statusBarIconBrightness: Brightness.dark,
-        ),
+    colorScheme: ColorScheme.fromSeed(seedColor: AppColors.origin),
+    scaffoldBackgroundColor: AppColors.backgroundDark,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.backgroundDark,
+      elevation: 0.0,
+    ),
+    cardTheme: CardTheme(
+      color: AppColors.subBackgroundDark,
+    ),
+    textTheme: TextTheme(
+      titleLarge: const TextStyle(
+        color: Colors.white,
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: AppColors.bgDarkColor,
+      titleMedium: TextStyle(
+        color: AppColors.branch,
+        fontSize: 20,
       ),
-      textTheme: const TextTheme(
-        bodyText1: TextStyle(
-          color: Colors.white,
-        ),
-        bodyText2: TextStyle(
-          color: Colors.black,
-        ),
+      titleSmall: const TextStyle(
+        color: Colors.white,
       ),
-      iconTheme: IconThemeData(
-        color: AppColors.bgLightColor,
-      ),
-      bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: AppColors.bgDarkColor,
-      )
-      );
+    ),
+    useMaterial3: true,
+  );
 }

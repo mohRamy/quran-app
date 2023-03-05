@@ -16,28 +16,33 @@ class IntroductionScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Al-Quran Apps",
-              style: TextStyle(
-                fontSize: Dimensions.font26,
-                fontWeight: FontWeight.bold,
+              "Quran App",
+              style: context.theme.textTheme.titleLarge,
+            ),
+            SizedBox(height: Dimensions.height15),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.height10 * 10,
+              ),
+              child: Text(
+                "Learn Quran and Recite once everyday",
+                textAlign: TextAlign.center,
+                style: context.theme.textTheme.titleMedium,
               ),
             ),
-            SizedBox(height: Dimensions.height20),
-            Text(
-              "The Holy Quran with translation into English",
-              style: TextStyle(
-                fontSize: Dimensions.font16,
+            SizedBox(height: Dimensions.height10 * 7),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.height20,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                child: Lottie.asset(
+                    AppString.animationQuran,
+                  ),
               ),
             ),
-            SizedBox(height: Dimensions.height20),
-            SizedBox(
-              width: 300,
-              height: 300,
-              child: Lottie.asset(
-                AppString.animationQuran,
-              ),
-            ),
-            SizedBox(height: Dimensions.height45),
+            SizedBox(height: Dimensions.height30),
             ElevatedButton(
               onPressed: ()=> Get.offAllNamed(Routes.home),
               child: const Text("Get Stated"),

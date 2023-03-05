@@ -10,11 +10,11 @@ class CustomLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: Dimensions.height20*5,
-        width: Dimensions.height20*5,
+        height: Dimensions.height20 * 5,
+        width: Dimensions.height20 * 5,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Dimensions.height20*5/2),
-          color: AppColors.primary,
+          borderRadius: BorderRadius.circular(Dimensions.height20 * 5 / 2),
+          color: AppColors.origin,
         ),
         alignment: Alignment.center,
         child: const CircularProgressIndicator(color: Colors.white),

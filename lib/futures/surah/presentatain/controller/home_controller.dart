@@ -29,18 +29,17 @@ class HomeController extends GetxController with HandleErrorLoading {
     );
     update();
     return allSurah;
-    
   }
 
-  late DetailSurah detailSurah;
-  FutureOr<void> getDetailSurah(String surahId) async {
-    showLoading();
+  
+  Future<DetailSurah> getDetailSurah(String surahId) async {
     final result = await getDetailSurahUsecase(surahId);
+    late DetailSurah detailSurah;
     result.fold(
       (l) => AppComponent.showCustomSnackBar(l.message),
       (r) => detailSurah = r,
     );
-    hideLoading();
     update();
+    return detailSurah;
   }
 }

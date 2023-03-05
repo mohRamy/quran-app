@@ -26,7 +26,7 @@ class DetailSurahModel extends DetailSurah {
         name: NameDetailModel.fromJson(json["name"]),
         revelation: RevelationDetailModel.fromJson(json["revelation"]),
         tafsir: DataTafsirModel.fromJson(json["tafsir"]),
-        preBismillah: PreBismillahModel.fromJson(json["preBismillah"]),
+        preBismillah: json["preBismillah"] == null ? null :  PreBismillahModel.fromJson(json["preBismillah"]),
         verses: List<VerseModel>.from(
             json["verses"].map((x) => VerseModel.fromJson(x))),
       );
@@ -90,7 +90,7 @@ class AudioModel extends Audio {
       );
 }
 
-class TextModel extends Text {
+class TextModel extends TextDetail {
   const TextModel({
     required super.arab,
     required super.transliteration,
