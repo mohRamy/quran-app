@@ -173,13 +173,15 @@ class Verse extends Equatable {
   final TranslationDetail translation;
   final Audio audio;
   final VerseTafsir tafsir;
-  const Verse({
+  String audioStatus;
+  Verse({
     required this.number,
     required this.meta,
     required this.text,
     required this.translation,
     required this.audio,
     required this.tafsir,
+    this.audioStatus = "stop",
   });
 
   @override

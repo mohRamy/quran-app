@@ -24,7 +24,7 @@ class HomeRepositoryImpl extends HomeRepository {
         return left(ServerFailure(message: failure.messageError));
       }
     } else {
-      return left(OfflineFailure(message: "Offline failure"));
+      return left(const OfflineFailure(message: "Offline failure"));
     }
   }
 
@@ -38,7 +38,21 @@ class HomeRepositoryImpl extends HomeRepository {
         return left(ServerFailure(message: failure.messageError));
       }
     } else {
-      return left(OfflineFailure(message: "Offline failure"));
+      return left(const OfflineFailure(message: "Offline failure"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Map<String, dynamic>>>> getAllJuz() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await homeRemoteDataSource.getAllJuz();
+        return right(result);
+      } on ServerException catch (failure) {
+        return left(ServerFailure(message: failure.messageError));
+      }
+    } else {
+      return left(const OfflineFailure(message: "Offline failure"));
     }
   }
 }

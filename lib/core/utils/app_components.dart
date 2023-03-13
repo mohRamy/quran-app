@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AppComponent {
-  static void showCustomSnackBar(
+class AppComponents {
+  static void snackBar(
     String message, {
     bool isError = true,
     String title = 'Error',

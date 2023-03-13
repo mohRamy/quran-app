@@ -139,7 +139,7 @@ class DataTafsirModel extends DataTafsir {
 }
 
 class VerseModel extends Verse {
-  const VerseModel({
+  VerseModel({
     required super.number,
     required super.meta,
     required super.text,

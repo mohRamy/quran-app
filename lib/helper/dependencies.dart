@@ -5,6 +5,7 @@ import 'package:quran_app/futures/surah/data/repository/home_repository_impl.dar
 import 'package:quran_app/futures/surah/domian/repository/home_repository.dart';
 import 'package:quran_app/futures/surah/domian/usecases/get_all_surah.dart';
 import 'package:quran_app/futures/surah/domian/usecases/get_detail_surah.dart';
+import 'package:quran_app/futures/surah/domian/usecases/get_all_juz.dart';
 import 'package:quran_app/futures/surah/presentatain/controller/home_controller.dart';
 import '../core/network/api_constance.dart';
 
@@ -31,10 +32,12 @@ Future<void> init() async {
   //controllers
   Get.lazyPut(() => GetAllSurahUsecase(Get.find()));
   Get.lazyPut(() => GetDetailSurahUsecase(Get.find()));
+  Get.lazyPut(() => GetAllJuzUsecase(Get.find()));
   Get.lazyPut(
     () => HomeController(
       getAllSurahUsecase: Get.find(),
       getDetailSurahUsecase: Get.find(),
+      getAllJuzUsecase: Get.find(),
     ),
   );
 }

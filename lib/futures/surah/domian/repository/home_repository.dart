@@ -6,4 +6,5 @@ import 'package:quran_app/futures/surah/domian/entities/surah.dart';
 abstract class HomeRepository{
   Future<Either<Failure, List<Surah>>> getAllSurah();
   Future<Either<Failure, DetailSurah>> getDetailSurah(String surahId);
+  Future<Either<Failure, List<Map<String, dynamic>>>> getAllJuz();
 }

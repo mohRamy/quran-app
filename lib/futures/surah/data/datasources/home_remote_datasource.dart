@@ -13,6 +13,7 @@ import '../../../../core/utils/constants/state_handle.dart';
 abstract class HomeRemoteDataSource {
   Future<List<Surah>> getAllSurah();
   Future<DetailSurah> getDetailSurah(String surahId);
+  Future<List<Map<String, dynamic>>> getAllJuz();
 }
 
 class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
@@ -20,7 +21,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(
     this.apiClient,
   );
-  
+
   @override
   Future<List<Surah>> getAllSurah() async {
     http.Response res = await apiClient.getData(
@@ -33,17 +34,17 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
         for (var i = 0; i < jsonDecode(res.body)["data"].length; i++) {
           allsurah.add(
             SurahModel.fromJson(
-                jsonDecode(
-                  res.body,
-                )["data"][i],
-              ),
+              jsonDecode(
+                res.body,
+              )["data"][i],
+            ),
           );
         }
       },
     );
     return allsurah;
   }
-  
+
   @override
   Future<DetailSurah> getDetailSurah(String surahId) async {
     http.Response res = await apiClient.getData(
@@ -51,16 +52,65 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     );
     late DetailSurah detailSurah;
     stateErrorHandle(
-      res: res,
-      onSuccess: () {
-          detailSurah = 
-            DetailSurahModel.fromJson(
-                jsonDecode(
-                  res.body,
-                )["data"],
+        res: res,
+        onSuccess: () {
+          detailSurah = DetailSurahModel.fromJson(
+            jsonDecode(
+              res.body,
+            )["data"],
           );
-        }
-    );
+        });
     return detailSurah;
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getAllJuz() async {
+    int juz = 1;
+    List<Map<String, dynamic>> perAyat = [];
+    List<Map<String, dynamic>> allJuz = [];
+
+    for (var i = 0; i < 114; i++) {
+      var res = await apiClient.getData("${ApiConstance.detailsSurah}$i");
+      stateErrorHandle(
+          res: res,
+          onSuccess: () {
+            Map<String, dynamic> rawData = json.decode(res.body)["data"];
+            DetailSurah data = DetailSurahModel.fromJson(rawData);
+
+            if (data.verses.isNotEmpty) {
+              for (var ayat in data.verses) {
+                if (ayat.meta.juz == juz) {
+                  perAyat.add({
+                    "surah": data,
+                    "ayat": ayat,
+                  });
+                } else {
+                  allJuz.add({
+                    "juz": juz,
+                    "start": perAyat[0],
+                    // perAyat.last
+                    "end": perAyat[perAyat.length - 1],
+                    "verses": perAyat,
+                  });
+                  juz++;
+                  perAyat = [];
+                  perAyat.add({
+                    "surah": data,
+                    "ayat": ayat,
+                  });
+                }
+              }
+            }
+          });
+    }
+    allJuz.add({
+      "juz": juz,
+      "start": perAyat[0],
+      // perAyat.last
+      "end": perAyat[perAyat.length - 1],
+      "verses": perAyat,
+    });
+
+    return allJuz;
   }
 }

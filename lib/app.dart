@@ -13,12 +13,9 @@ class QuranApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quran App',
+      themeMode: ThemeMode.light,
       theme: Themes.light,
-      themeMode: ModeTheme().theme,
-      // ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: AppColors.origin),
-      //   useMaterial3: true,
-      // ),
+      darkTheme: Themes.dark,
       initialRoute: Routes.introduction,
       getPages: AppPages.routes,
     );

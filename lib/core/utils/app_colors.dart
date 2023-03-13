@@ -10,10 +10,20 @@ class AppColors {
   static Color backgroundDark = HexColor("FF1E0771");
   static Color subBackgroundDark = HexColor("FF2B0C8B");
   static Color button = HexColor("FFE6704A");
+
+  static Gradient gradient = LinearGradient(
+    begin: Alignment.bottomRight,
+    end: Alignment.topLeft,
+    colors: [
+      branch,
+      origin,
+    ],
+  );
 }
 
 class Themes {
   static final light = ThemeData(
+    // brightness: Brightness.light,
     colorScheme: ColorScheme.fromSeed(seedColor: AppColors.origin),
     scaffoldBackgroundColor: AppColors.backgroundLight,
     appBarTheme: AppBarTheme(
@@ -23,10 +33,20 @@ class Themes {
     cardTheme: CardTheme(
       color: AppColors.subBackgroundLight,
     ),
-    textTheme: TextTheme(
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: AppColors.backgroundDark,
+    ),
+    listTileTheme: ListTileThemeData(
+      textColor: AppColors.backgroundDark,
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: AppColors.origin,
+      unselectedLabelColor: Colors.grey,
+    ),
+    textTheme: TextTheme( 
       titleLarge: TextStyle(
         color: AppColors.origin,
-        fontSize: 30,
+        fontSize: 27,
         fontWeight: FontWeight.bold,
       ),
       titleMedium: TextStyle(
@@ -41,6 +61,7 @@ class Themes {
   );
 
   static final dark = ThemeData(
+    // brightness: Brightness.dark,
     colorScheme: ColorScheme.fromSeed(seedColor: AppColors.origin),
     scaffoldBackgroundColor: AppColors.backgroundDark,
     appBarTheme: AppBarTheme(
@@ -50,10 +71,20 @@ class Themes {
     cardTheme: CardTheme(
       color: AppColors.subBackgroundDark,
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: AppColors.backgroundLight,
+    ),
+    listTileTheme: ListTileThemeData(
+      textColor: AppColors.backgroundLight,
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: AppColors.backgroundLight,
+      unselectedLabelColor: Colors.grey,
+    ),
     textTheme: TextTheme(
       titleLarge: const TextStyle(
         color: Colors.white,
-        fontSize: 30,
+        fontSize: 27,
         fontWeight: FontWeight.bold,
       ),
       titleMedium: TextStyle(

@@ -38,7 +38,7 @@ class IntroductionScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
                 child: Lottie.asset(
-                    AppString.animationQuran,
+                    AppString.animationAsset,
                   ),
               ),
             ),

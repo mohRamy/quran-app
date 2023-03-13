@@ -4,4 +4,5 @@ class ApiConstance {
   // surah
   static const String allSurah = "$baseUrl/surah";
   static const String detailsSurah = "$baseUrl/surah/";
+  static const String juz = "$baseUrl/juz/";
 }
