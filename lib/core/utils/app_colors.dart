@@ -43,7 +43,14 @@ class Themes {
       labelColor: AppColors.origin,
       unselectedLabelColor: Colors.grey,
     ),
-    textTheme: TextTheme( 
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        iconColor: MaterialStateProperty.all(
+          AppColors.origin,
+        ),
+      ),
+    ),
+    textTheme: TextTheme(
       titleLarge: TextStyle(
         color: AppColors.origin,
         fontSize: 27,
@@ -80,6 +87,13 @@ class Themes {
     tabBarTheme: TabBarTheme(
       labelColor: AppColors.backgroundLight,
       unselectedLabelColor: Colors.grey,
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        iconColor: MaterialStateProperty.all(
+          AppColors.branch,
+        ),
+      ),
     ),
     textTheme: TextTheme(
       titleLarge: const TextStyle(

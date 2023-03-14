@@ -31,19 +31,17 @@ class SurahWidget extends GetView<HomeController> {
                         AppString.octagonalAsset,
                       ),
                       fit: BoxFit.cover,
-                      color: Get.isDarkMode ? Colors.white : AppColors.origin,
+                      color: AppColors.origin,
                       height: 35,
                       width: 35,
                     ),
                     Text(
                       "${index + 1}",
-                      //style: context.theme.textTheme.titleSmall,
                     ),
                   ],
                 ),
                 title: Text(
                   surah.name.transliteration.en,
-                  //style: context.theme.textTheme.titleSmall,
                 ),
                 subtitle: Text(
                   "${surah.numberOfVerses} Ayat ${surah.revelation.id}",

@@ -27,7 +27,7 @@ class DataBaseManager {
         onCreate: (database, version) async {
       return await database.execute('''
         CREATE TABLE bookmark (
-          id INTEGER PRIMARY KEY AUTOINCRIMENT NOT NULL,
+          id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           surah TEXT NOT NULL,
           ayat INTEGER NOT NULL,
           juz INTEGER NOT NULL,
@@ -40,7 +40,7 @@ class DataBaseManager {
   }
 
   Future closeDB() async {
-  _db =await instance._db;
+  _db = await instance.db;
   _db!.close();
   }
 }

@@ -167,90 +167,103 @@ class DetailSurahScreen extends GetView<HomeController> {
                                   ),
                                   const Spacer(),
                                   GetBuilder<HomeController>(
-                                    builder: (homeController) => 
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          Get.defaultDialog(
-                                              radius: Dimensions.radius15,
-                                              backgroundColor: Get.isDarkMode
-                                                  ? AppColors.backgroundLight
-                                                      .withOpacity(0.2)
-                                                  : AppColors.backgroundDark
-                                                      .withOpacity(0.2),
-                                              title: "BOOKMARK",
-                                              middleText: "add to book mark",
-                                              actions: [
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    homeController.addBookmark(true, snapshot.data!, ayat, index);
-                                                  },
-                                                  child: const Text('LAST READ'),
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    homeController.addBookmark(true, snapshot.data!, ayat, index);
-                                                  },
-                                                  child: const Text('BOOKMARK'),
-                                                ),
-                                              ]);
-                                        },
-                                        icon: Icon(
-                                          Icons.bookmark_add_outlined,
-                                          color: AppColors.origin,
+                                    builder: (homeController) => Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            Get.defaultDialog(
+                                                radius: Dimensions.radius15,
+                                                backgroundColor: Get.isDarkMode
+                                                    ? AppColors.backgroundLight
+                                                        .withOpacity(0.2)
+                                                    : AppColors.backgroundDark
+                                                        .withOpacity(0.2),
+                                                title: "BOOKMARK",
+                                                middleText: "add to book mark",
+                                                actions: [
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      homeController
+                                                          .addBookmark(
+                                                              true,
+                                                              snapshot.data!,
+                                                              ayat,
+                                                              index);
+                                                    },
+                                                    child:
+                                                        const Text('LAST READ'),
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      homeController
+                                                          .addBookmark(
+                                                              false,
+                                                              snapshot.data!,
+                                                              ayat,
+                                                              index);
+                                                    },
+                                                    child:
+                                                        const Text('BOOKMARK'),
+                                                  ),
+                                                ]);
+                                          },
+                                          icon: Icon(
+                                            Icons.bookmark_add_outlined,
+                                            color: AppColors.origin,
+                                          ),
                                         ),
-                                      ),
-                                      ayat
-                                                .audioStatus ==
-                                            "stop"
-                                        ? IconButton(
-                                            onPressed: () {
-                                              homeController.playAudio(ayat);
-                                            },
-                                            icon: Icon(
-                                              Icons.play_arrow,
-                                              color: AppColors.origin,
-                                            ),
-                                          )
-                                        : Row(
-                                            children: [
-                                              ayat.audioStatus == "playing"
-                                                  ? IconButton(
-                                                      onPressed: () {
-                                                        homeController
-                                                            .pauseAudio(ayat);
-                                                      },
-                                                      icon: Icon(
-                                                        Icons.pause,
-                                                        color: AppColors.origin,
-                                                      ),
-                                                    )
-                                                  : IconButton(
-                                                      onPressed: () {
-                                                        homeController
-                                                            .resumeAudio(ayat);
-                                                      },
-                                                      icon: Icon(
-                                                        Icons.play_arrow,
-                                                        color: AppColors.origin,
-                                                      ),
-                                                    ),
-                                              IconButton(
+                                        (ayat.audioStatus == "stop")
+                                            ? IconButton(
                                                 onPressed: () {
                                                   homeController
-                                                      .stopAudio(ayat);
+                                                      .playAudio(ayat);
                                                 },
                                                 icon: Icon(
-                                                  Icons.stop,
+                                                  Icons.play_arrow,
                                                   color: AppColors.origin,
                                                 ),
-                                              ),
-                                            ],
-                                          )
-
-                                    ],
-                                  ),
+                                              )
+                                            : Row(
+                                                children: [
+                                                  (ayat.audioStatus == "playing")
+                                                      ? IconButton(
+                                                          onPressed: () {
+                                                            homeController
+                                                                .pauseAudio(
+                                                                    ayat);
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.pause,
+                                                            color: AppColors
+                                                                .origin,
+                                                          ),
+                                                        )
+                                                      : IconButton(
+                                                          onPressed: () {
+                                                            homeController
+                                                                .resumeAudio(
+                                                                    ayat);
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.play_arrow,
+                                                            color: AppColors
+                                                                .origin,
+                                                          ),
+                                                        ),
+                                                  IconButton(
+                                                    onPressed: () {
+                                                      homeController
+                                                          .stopAudio(ayat);
+                                                    },
+                                                    icon: Icon(
+                                                      Icons.stop,
+                                                      color: AppColors.origin,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                      ],
+                                    ),
                                   ),
                                 ]),
                               ),

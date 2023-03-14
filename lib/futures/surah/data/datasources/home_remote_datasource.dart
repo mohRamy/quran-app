@@ -69,48 +69,43 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     List<Map<String, dynamic>> perAyat = [];
     List<Map<String, dynamic>> allJuz = [];
 
-    for (var i = 0; i < 114; i++) {
+    for (var i = 1; i <= 11; i++) {
       var res = await apiClient.getData("${ApiConstance.detailsSurah}$i");
-      stateErrorHandle(
-          res: res,
-          onSuccess: () {
-            Map<String, dynamic> rawData = json.decode(res.body)["data"];
-            DetailSurah data = DetailSurahModel.fromJson(rawData);
+      Map<String, dynamic> rawData = json.decode(res.body)["data"];
+      DetailSurah data = DetailSurahModel.fromJson(rawData);
 
-            if (data.verses.isNotEmpty) {
-              for (var ayat in data.verses) {
-                if (ayat.meta.juz == juz) {
-                  perAyat.add({
-                    "surah": data,
-                    "ayat": ayat,
-                  });
-                } else {
-                  allJuz.add({
-                    "juz": juz,
-                    "start": perAyat[0],
-                    // perAyat.last
-                    "end": perAyat[perAyat.length - 1],
-                    "verses": perAyat,
-                  });
-                  juz++;
-                  perAyat = [];
-                  perAyat.add({
-                    "surah": data,
-                    "ayat": ayat,
-                  });
-                }
-              }
-            }
-          });
+      if (data.verses.isNotEmpty) {
+        for (var ayat in data.verses) {
+          if (ayat.meta.juz == juz) {
+            perAyat.add({
+              "surah": data,
+              "ayat": ayat,
+            });
+          } else {
+            allJuz.add({
+              "juz": juz,
+              "start": perAyat[0],
+              // perAyat.last
+              "end": perAyat[perAyat.length - 1],
+              "verses": perAyat,
+            });
+            juz++;
+            perAyat = [];
+            perAyat.add({
+              "surah": data,
+              "ayat": ayat,
+            });
+          }
+        }
+      }
     }
     allJuz.add({
-      "juz": juz,
-      "start": perAyat[0],
-      // perAyat.last
-      "end": perAyat[perAyat.length - 1],
-      "verses": perAyat,
-    });
-
+        "juz": juz,
+        "start": perAyat[0],
+        // perAyat.last
+        "end": perAyat[perAyat.length - 1],
+        "verses": perAyat,
+      });
     return allJuz;
   }
 }

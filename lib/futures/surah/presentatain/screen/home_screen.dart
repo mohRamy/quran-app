@@ -21,16 +21,17 @@ class HomeScreen extends GetView<HomeController> {
           "Quran App",
           style: context.theme.textTheme.titleLarge,
         ),
-        leading: Icon(
-          Icons.menu,
-          color: AppColors.origin,
-        ),
+        leading: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.menu,
+            ),
+          ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.search,
-              color: AppColors.origin,
             ),
           ),
           SizedBox(width: Dimensions.width20),
@@ -162,14 +163,13 @@ class HomeScreen extends GetView<HomeController> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.origin,
         onPressed: () {
           ModeTheme().changeTheme();
         },
         child: Icon(
           Icons.color_lens,
-          color: Get.isDarkMode
-              ? AppColors.backgroundLight
-              : AppColors.backgroundDark,
+          color: AppColors.backgroundLight,
         ),
       ),
     );

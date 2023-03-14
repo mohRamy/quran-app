@@ -7,7 +7,6 @@ import 'package:quran_app/futures/surah/presentatain/controller/home_controller.
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_loader.dart';
-import '../../domian/entities/surah.dart';
 
 class JuzWidget extends GetView<HomeController> {
   const JuzWidget({super.key});
@@ -19,29 +18,10 @@ class JuzWidget extends GetView<HomeController> {
         if (snapshot.connectionState == ConnectionState.done) {
           return ListView.builder(
             physics: const BouncingScrollPhysics(),
-            itemCount: snapshot.data!.length,
+            itemCount: snapshot.data?.length ?? 0,
             itemBuilder: (context, index) {
               Map<String, dynamic> dataMapPerJuz = snapshot.data![index];
 
-              // String nameStart = juz.start.split(" - ").first;
-              // String nameEnd = juz.end.split(" - ").first;
-
-              // List<Surah> rawAllSurahInJuz = [];
-              // List<Surah> allSurahInJuz = [];
-
-              // for (Surah item in controller.allSurah) {
-              //   rawAllSurahInJuz.add(item);
-              //   if (item.name.transliteration.id == nameEnd) {
-              //     break;
-              //   }
-              // }
-
-              // for (Surah item in rawAllSurahInJuz.reversed.toList( )) {
-              //   allSurahInJuz.add(item);
-              //   if (item.name.transliteration.id == nameStart) {
-              //     break;
-              //   }
-              // }
               return ListTile(
                 onTap: () =>
                     Get.toNamed(Routes.detailJuz, arguments: dataMapPerJuz),

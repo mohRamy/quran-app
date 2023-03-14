@@ -51,13 +51,13 @@ class HomeController extends GetxController {
 
   Future<List<Map<String, dynamic>>> getAllJuz() async {
     final result = await getAllJuzUsecase();
-    late List<Map<String, dynamic>> detailSurah;
+    late List<Map<String, dynamic>> allJuz;
     result.fold(
       (l) => AppComponents.snackBar(l.message),
-      (r) => detailSurah = r,
+      (r) => allJuz = r,
     );
     update();
-    return detailSurah;
+    return allJuz;
   }
 
   DataBaseManager dataBase = DataBaseManager.instance;
@@ -72,8 +72,9 @@ class HomeController extends GetxController {
       await db.delete("bookmark", where: "last_read = 1");
     } else {
       List checkData = await db.query("bookmark",
+          columns: ["surah", "ayat", "juz", "via", "index_ayat", "last_read"],
           where:
-              "surah = '${surah.name.transliteration.id}' and ayat = ${ayat.number.inSurah} and juz = ${ayat.meta.juz} and via = 'surah' and index_ayat = $indexAyat and last_read = 0");
+              "surah = '${surah.name.transliteration.id.replaceAll("'", "+")}' and ayat = ${ayat.number.inSurah} and juz = ${ayat.meta.juz} and via = 'surah' and index_ayat = $indexAyat and last_read = 0");
 
       if (checkData.isNotEmpty) {
         flagExist = true;
@@ -81,14 +82,17 @@ class HomeController extends GetxController {
     }
 
     if (flagExist == false) {
-      await db.insert("bookmark", {
-        "surah": surah.name.transliteration.id,
-        "ayat": ayat.number.inSurah,
-        "juz": ayat.meta.juz,
-        "via": "surah",
-        "index_ayat": indexAyat,
-        "last_read": lastRead == true ? 1 : 0,
-      });
+      await db.insert(
+        "bookmark",
+        {
+          "surah": surah.name.transliteration.id.replaceAll("'", "+"),
+          "ayat": ayat.number.inSurah,
+          "juz": ayat.meta.juz,
+          "via": "surah",
+          "index_ayat": indexAyat,
+          "last_read": lastRead == true ? 1 : 0,
+        },
+      );
       Get.back();
       AppComponents.snackBar(
         "Saved successfully",
@@ -103,6 +107,8 @@ class HomeController extends GetxController {
         color: Colors.yellow,
       );
     }
+    var data = await db.query("bookmark");
+    print(data);
   }
 
   Future<List<Map<String, dynamic>>> getBookmark() async {
@@ -112,6 +118,17 @@ class HomeController extends GetxController {
       where: "last_read = 0",
     );
     return allBookmarks;
+  }
+
+  void deleteBookmark(int id) async {
+    Database db = await dataBase.db;
+    await db.delete("bookmark", where: "id = $id");
+    update();
+    AppComponents.snackBar(
+        "Delete bookmark",
+        title: "Local Storage",
+        color: Colors.green,
+      );
   }
 
   final player = AudioPlayer();
@@ -126,11 +143,11 @@ class HomeController extends GetxController {
       update();
       await player.stop();
       await player.setUrl(ayat.audio.primary);
-      await player.play();
       ayat.audioStatus = "playing";
       update();
-      await player.stop();
+      await player.play();
       ayat.audioStatus = "stop";
+      await player.stop();
       update();
     } catch (e) {
       print("null");
@@ -141,7 +158,6 @@ class HomeController extends GetxController {
     try {
       await player.pause();
       ayat.audioStatus = "pause";
-      update();
     } catch (e) {
       print("null");
     }
@@ -149,9 +165,9 @@ class HomeController extends GetxController {
 
   void resumeAudio(Verse ayat) async {
     try {
-      await player.play();
       ayat.audioStatus = "playing";
       update();
+      await player.play();
       ayat.audioStatus = "stop";
       update();
     } catch (e) {

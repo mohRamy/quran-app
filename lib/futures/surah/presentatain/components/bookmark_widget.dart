@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quran_app/core/utils/dimensions.dart';
 import 'package:quran_app/futures/surah/presentatain/controller/home_controller.dart';
 
 import '../../../../config/routes/app_pages.dart';
@@ -22,7 +23,10 @@ class BookmarkWidget extends GetView<HomeController> {
               return Center(
                 child: Text(
                   "Bookmark box is Empty",
-                  style: context.theme.textTheme.titleLarge,
+                  style: TextStyle(
+                    fontSize: Dimensions.font20,
+                    color: Colors.grey,
+                  ),
                 ),
               );
             }
@@ -33,14 +37,25 @@ class BookmarkWidget extends GetView<HomeController> {
                 Map<String, dynamic> data = snapshot.data![index];
                 return ListTile(
                   onTap: () {},
-                  leading: CircleAvatar(
-                    backgroundColor:
-                        Get.isDarkMode ? Colors.white : AppColors.origin,
-                    child: Text("${index + 1}"),
-                  ),
+                  leading: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image(
+                      image: const AssetImage(
+                        AppString.octagonalAsset,
+                      ),
+                      fit: BoxFit.cover,
+                      color: AppColors.origin,
+                      height: 35,
+                      width: 35,
+                    ),
+                    Text(
+                      "${index + 1}",
+                    ),
+                  ],
+                ),
                   title: Text(
-                    data['surah'],
-                    //style: context.theme.textTheme.titleSmall,
+                    data['surah'].toString().replaceAll("+", "'"),
                   ),
                   subtitle: Text(
                     "Ayat ${data['ayat']} - via ${data['via']}",
@@ -48,6 +63,15 @@ class BookmarkWidget extends GetView<HomeController> {
                       color: Colors.grey,
                     ),
                   ),
+                  trailing: IconButton(
+            onPressed: () {
+              homeController.deleteBookmark(data['id']);
+            },
+            icon: Icon(
+              Icons.delete,
+              color: AppColors.branch,
+            ),
+          ),
                 );
               },
             );
